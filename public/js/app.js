@@ -18,13 +18,7 @@ document.addEventListener('DOMContentLoaded', function () {
         });
     });
 
-    // ---- Tambah button placeholder ----
-    const btnTambah = document.getElementById('btnTambah');
-    if (btnTambah) {
-        btnTambah.addEventListener('click', function () {
-            alert('Form Tambah akan ditampilkan di sini.');
-        });
-    }
+    
 
     // ---- Presensi accordion toggle ----
     document.querySelectorAll('.presensi-item-header').forEach(function (header) {

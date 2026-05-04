@@ -32,7 +32,10 @@ require_once 'layouts/header.php';
             <i class="bi bi-question-circle-fill me-1"></i>Kuis
         </a>
     </div>
-    <button class="btn btn-primary btn-tambah" id="btnTambah">Tambah</button>
+    <?php
+        $tambahUrl = ($tab === 'tugas') ? 'tambah_tugas.php?kelas_id=' . $kelasId : 'tambah_kuis.php?kelas_id=' . $kelasId;
+    ?>
+    <a href="<?= $tambahUrl ?>" class="btn btn-primary btn-tambah" id="btnTambah">Tambah</a>
 </div>
 
 <div class="tab-content-area">

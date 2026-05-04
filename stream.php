@@ -40,7 +40,11 @@ require_once 'layouts/header.php';
             <i class="bi bi-journal-bookmark-fill me-1"></i>Materi
         </a>
     </div>
-    <button class="btn btn-primary btn-tambah" id="btnTambah">Tambah</button>
+    <?php
+        $tambahUrl = ($tab === 'materi') ? 'tambah_materi.php?kelas_id=' . $kelasId : 'tambah_pengumuman.php?kelas_id=' . $kelasId;
+        
+    ?>
+    <a href="<?= $tambahUrl ?>" class="btn btn-primary btn-tambah" id="btnTambah">Tambah</a>
 </div>
 
 <!-- Tab Content -->
