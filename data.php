@@ -55,11 +55,11 @@ function getPengumumanById($id) {
 $materiList = [
     [
         'id'         => 1,
-        'pertemuan'  => 'Pertemuan 1',
+        'judul'  => 'Pertemuan 1',
         'tanggal'    => '28 Maret 2026',
         'tipe'       => 'Tautan Youtube',
         'tipe_icon'  => 'youtube',
-        'judul'      => 'Materi UI/UX',
+        'deskripsi'      => 'Materi UI/UX',
         'status'     => 'aktif',
         'lampiran'   => [
             [
@@ -68,14 +68,18 @@ $materiList = [
                 'url'   => 'https://www.youtube.com/watch?v=yS2AEWC1JeM&list=RDyS2AEWC1JeM&start_radio=1',
             ]
         ],
+        'komentar' => [
+            ['nama' => 'Budi Santoso', 'waktu' => '28 Feb 2026, 09:15', 'isi' => 'Baik bu, terima kasih informasinya.'],
+            ['nama' => 'Siti Rahayu',  'waktu' => '28 Feb 2026, 10:02', 'isi' => 'Siap bu!'],
+        ],
     ],
     [
         'id'         => 2,
-        'pertemuan'  => 'Pertemuan 2',
+        'judul'  => 'Pertemuan 2',
         'tanggal'    => '28 Februari 2026',
         'tipe'       => 'Unggahan file',
         'tipe_icon'  => 'file',
-        'judul'      => 'Materi Pemrograman digital',
+        'deskripsi'      => 'Materi Pemrograman digital',
         'status'     => 'aktif',
         'lampiran'   => [
             [
@@ -84,14 +88,18 @@ $materiList = [
                 'url'   => '#',
             ]
         ],
+        'komentar' => [
+            ['nama' => 'Budi Santoso', 'waktu' => '28 Feb 2026, 09:15', 'isi' => 'Baik bu, terima kasih informasinya.'],
+            ['nama' => 'Siti Rahayu',  'waktu' => '28 Feb 2026, 10:02', 'isi' => 'Siap bu!'],
+        ],
     ],
     [
         'id'         => 3,
-        'pertemuan'  => 'Pertemuan 3',
+        'judul'  => 'Pertemuan 3',
         'tanggal'    => '07 Maret 2026',
         'tipe'       => 'Tautan Youtube',
         'tipe_icon'  => 'youtube',
-        'judul'      => 'Materi HTML Dasar',
+        'deskripsi'      => 'Materi HTML Dasar',
         'status'     => 'draft',
         'lampiran'   => [
             [

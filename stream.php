@@ -42,7 +42,7 @@ require_once 'layouts/header.php';
     </div>
     <?php
         $tambahUrl = ($tab === 'materi') ? 'tambah_materi.php?kelas_id=' . $kelasId : 'tambah_pengumuman.php?kelas_id=' . $kelasId;
-        
+
     ?>
     <a href="<?= $tambahUrl ?>" class="btn btn-primary btn-tambah" id="btnTambah">Tambah</a>
 </div>
@@ -88,7 +88,7 @@ require_once 'layouts/header.php';
         $detailMateriUrl = 'detail_materi.php?id=' . $m['id'] . '&kelas_id=' . $kelasId;
     ?>
     <div class="lms-card lms-card-clickable" style="border-left-color: <?= $borderColor ?>;" onclick="window.location='<?= $detailMateriUrl ?>'" role="link" tabindex="0">
-        <h5 class="materi-pertemuan"><?= htmlspecialchars($m['pertemuan']) ?></h5>
+        <h5 class="materi-judul"><?= htmlspecialchars($m['judul']) ?></h5>
         <div class="materi-meta">
             <span class="materi-tanggal"><i class="bi bi-calendar3 me-1"></i><?= htmlspecialchars($m['tanggal']) ?></span>
             <?php if ($m['tipe_icon'] === 'youtube'): ?>
@@ -97,7 +97,7 @@ require_once 'layouts/header.php';
             <span class="materi-tipe"><i class="bi bi-paperclip me-1"></i><?= htmlspecialchars($m['tipe']) ?></span>
             <?php endif; ?>
         </div>
-        <p class="materi-judul"><?= htmlspecialchars($m['judul']) ?></p>
+        <p class="materi-deskripsi"><?= htmlspecialchars($m['deskripsi']) ?></p>
         <hr class="lms-card-divider">
         <div class="materi-lampiran-label"><i class="bi bi-paperclip me-1"></i>Lampiran</div>
         <?php foreach ($m['lampiran'] as $lamp): ?>
