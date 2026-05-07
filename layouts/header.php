@@ -1,7 +1,7 @@
 <?php
 // Initialize settings
 if (!defined('BASE_URL')) {
-    define('BASE_URL', 'http://' . $_SERVER['HTTP_HOST'] . '/Magang/LMS-Trunojoyo');
+define('BASE_URL', 'http://lms-trunojoyo.test');
 }
 
 // Get class ID from URL
