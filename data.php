@@ -242,9 +242,9 @@ $presensiList = [
 function getPertemuanByKelas($kelasId) {
     return [
         ['id' => 1,  'label' => 'Pertemuan 1',  'status' => 'selesai'],
-        ['id' => 2,  'label' => 'Pertemuan 2',  'status' => 'berlangsung'],
-        ['id' => 3,  'label' => 'Pertemuan 3',  'status' => ''],
-        ['id' => 4,  'label' => 'Pertemuan 4',  'status' => ''],
+        ['id' => 2,  'label' => 'Pertemuan 2',  'status' => 'selesai'],
+        ['id' => 3,  'label' => 'Pertemuan 3',  'status' => 'belum_dimulai'],
+        ['id' => 4,  'label' => 'Pertemuan 4',  'status' => 'berlangsung'],
         ['id' => 5,  'label' => 'Pertemuan 5',  'status' => ''],
         ['id' => 6,  'label' => 'Pertemuan 6',  'status' => ''],
         ['id' => 7,  'label' => 'Pertemuan 7',  'status' => ''],
@@ -317,4 +317,51 @@ $laporanList = [
         'icon' => 'calculator'
     ],
 ];
+
+$mahasiswaList = [
+    ['id' =>  1, 'nim' => '230411100001', 'nama' => 'Andi Prasetyo Nugroho'],
+    ['id' =>  2, 'nim' => '230411100002', 'nama' => 'Bagas Lorelius Darmawan Saputra'],
+    ['id' =>  3, 'nim' => '230411100003', 'nama' => 'Citra Dewi Ramadhani'],
+    ['id' =>  4, 'nim' => '230411100004', 'nama' => 'Dimas Fathur Rahman Hidayat'],
+    ['id' =>  5, 'nim' => '230411100005', 'nama' => 'Eka Putri Wulandari'],
+    ['id' =>  6, 'nim' => '230411100006', 'nama' => 'Fariz Muhammad Alfarizi Kurniawan'],
+    ['id' =>  7, 'nim' => '230411100007', 'nama' => 'Gilang Ramadhan'],
+    ['id' =>  8, 'nim' => '230411100008', 'nama' => 'Hana Safitri Anggraeni'],
+    ['id' =>  9, 'nim' => '230411100009', 'nama' => 'Irfan Dwi Prasetya'],
+    ['id' => 10, 'nim' => '230411100010', 'nama' => 'Julia Anastasya Permata Sari'],
+    ['id' => 11, 'nim' => '230411100011', 'nama' => 'Kevin Ardiansyah Putra'],
+    ['id' => 12, 'nim' => '230411100012', 'nama' => 'Laila Nur Rohmah Widyastuti'],
+    ['id' => 13, 'nim' => '230411100013', 'nama' => 'Muhammad Rizky Fadillah'],
+    ['id' => 14, 'nim' => '230411100014', 'nama' => 'Nabila Zahra Kusuma Dewi'],
+    ['id' => 15, 'nim' => '230411100015', 'nama' => 'Oscar Taufiq Hidayatulloh'],
+    ['id' => 16, 'nim' => '230411100016', 'nama' => 'Putri Ayu Setyawati'],
+    ['id' => 17, 'nim' => '230411100017', 'nama' => 'Quincy Bintang Pradipta Nuswantara'],
+    ['id' => 18, 'nim' => '230411100018', 'nama' => 'Rendra Firmansyah'],
+    ['id' => 19, 'nim' => '230411100019', 'nama' => 'Siti Nur Azizah'],
+    ['id' => 20, 'nim' => '230411100020', 'nama' => 'Taufik Ardiyanto Wibowo'],
+    ['id' => 21, 'nim' => '230411100021', 'nama' => 'Ulfa Mareta Cahyani'],
+    ['id' => 22, 'nim' => '230411100022', 'nama' => 'Vino Arya Pratama'],
+    ['id' => 23, 'nim' => '230411100023', 'nama' => 'Wahyu Nur Hidayat'],
+    ['id' => 24, 'nim' => '230411100024', 'nama' => 'Xena Noverita Christianty Simbolon'],
+    ['id' => 25, 'nim' => '230411100025', 'nama' => 'Yoga Dwi Saputra'],
+    ['id' => 26, 'nim' => '230411100026', 'nama' => 'Zahra Alifia Ramadhanti'],
+    ['id' => 27, 'nim' => '230411100027', 'nama' => 'Agus Setiawan'],
+    ['id' => 28, 'nim' => '230411100028', 'nama' => 'Bella Oktaviani'],
+    ['id' => 29, 'nim' => '230411100029', 'nama' => 'Cholid Faturrohman Wicaksono'],
+    ['id' => 30, 'nim' => '230411100030', 'nama' => 'Dewi Puspita Arum Ningrum'],
+    ['id' => 31, 'nim' => '230411100031', 'nama' => 'Eko Budi Santoso'],
+];
+
+function getMahasiswaByKelas($kelasId) {
+    global $mahasiswaList;
+    // In a real app, filter by kelasId. Here we return all for demo.
+    $statusOptions = ['M', 'A', 'S', 'D', 'I'];
+    $result = [];
+    foreach ($mahasiswaList as $mhs) {
+        $result[] = array_merge($mhs, [
+            'status' => $statusOptions[array_rand($statusOptions)]
+        ]);
+    }
+    return $result;
+}
 ?>

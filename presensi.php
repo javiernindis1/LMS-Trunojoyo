@@ -26,8 +26,9 @@ require_once 'layouts/header.php';
 
     <div class="presensi-list">
         <?php foreach ($pertemuan as $index => $p):
-            $isBerlangsung = $p['status'] === 'berlangsung';
-            $isSelesai     = $p['status'] === 'selesai';
+            $isBerlangsung  = $p['status'] === 'berlangsung';
+            $isSelesai      = $p['status'] === 'selesai';
+            $isBelumDimulai = !$isBerlangsung && !$isSelesai;
         ?>
         <div class="presensi-item <?= $isBerlangsung ? 'presensi-item--open' : '' ?>">
             <div class="presensi-item-header">
@@ -41,13 +42,17 @@ require_once 'layouts/header.php';
                     <i class="bi bi-chevron-down presensi-chevron"></i>
                 </div>
             </div>
-            <?php if ($isBerlangsung): ?>
             <div class="presensi-item-body">
-                <a href="#" class="btn btn-success btn-sm presensi-absensi-btn">
+                <?php if ($isBerlangsung || $isBelumDimulai): ?>
+                <a href="detail_presensi.php?kelas_id=<?= $kelasId?>&pertemuan_id=<?= $p['id'] ?>" class="btn btn-success btn-sm presensi-absensi-btn">
                     <i class="bi bi-clipboard-check me-1"></i>Mulai Absensi
                 </a>
+                <?php elseif ($isSelesai): ?>
+                <a href="detail_presensi.php?kelas_id=<?= $kelasId?>&pertemuan_id=<?= $p['id'] ?>" class="btn btn-primary btn-sm presensi-absensi-btn">
+                    <i class="bi bi-eye me-1"></i>Lihat Absensi
+                </a>
+                <?php endif; ?>
             </div>
-            <?php endif; ?>
         </div>
         <?php endforeach; ?>
     </div>
