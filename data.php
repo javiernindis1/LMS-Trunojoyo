@@ -1,5 +1,102 @@
 <?php
-// Mock Database / Data Arrays for LMS
+// ── Dummy User Accounts ──────────────────────────────────────────────────────
+// role: 'dosen' | 'mahasiswa'
+
+$userAccounts = [
+    // ── Dosen ────────────────────────────────────
+    [
+        'id'       => 'D001',
+        'username' => 'siti.aminah',
+        'password' => 'dosen123',
+        'nama'     => 'Dr. Siti Aminah, M.Kom.',
+        'nip'      => '197804152005012001',
+        'role'     => 'dosen',
+        'avatar'   => null,
+    ],
+    [
+        'id'       => 'D002',
+        'username' => 'budi.raharjo',
+        'password' => 'dosen123',
+        'nama'     => 'Budi Raharjo, S.T., M.T.',
+        'nip'      => '198103222008011003',
+        'role'     => 'dosen',
+        'avatar'   => null,
+    ],
+    [
+        'id'       => 'D003',
+        'username' => 'wahyu.hidayat',
+        'password' => 'dosen456',
+        'nama'     => 'Wahyu Hidayat, M.Cs.',
+        'nip'      => '198507172010011012',
+        'role'     => 'dosen',
+        'avatar'   => null,
+    ],
+
+    // ── Mahasiswa ─────────────────────────────────
+    [
+        'id'       => 'M001',
+        'username' => '230411100001',
+        'password' => 'mhs123',
+        'nama'     => 'Andi Prasetyo Nugroho',
+        'nim'      => '230411100001',
+        'role'     => 'mahasiswa',
+        'avatar'   => null,
+    ],
+    [
+        'id'       => 'M002',
+        'username' => '230411100002',
+        'password' => 'mhs123',
+        'nama'     => 'Bagas Lorelius Darmawan Saputra',
+        'nim'      => '230411100002',
+        'role'     => 'mahasiswa',
+        'avatar'   => null,
+    ],
+    [
+        'id'       => 'M003',
+        'username' => '230411100003',
+        'password' => 'mhs123',
+        'nama'     => 'Citra Dewi Ramadhani',
+        'nim'      => '230411100003',
+        'role'     => 'mahasiswa',
+        'avatar'   => null,
+    ],
+    [
+        'id'       => 'M004',
+        'username' => '230411100004',
+        'password' => 'mhs456',
+        'nama'     => 'Dimas Fathur Rahman Hidayat',
+        'nim'      => '230411100004',
+        'role'     => 'mahasiswa',
+        'avatar'   => null,
+    ],
+    [
+        'id'       => 'M005',
+        'username' => '230411100005',
+        'password' => 'mhs456',
+        'nama'     => 'Eka Putri Wulandari',
+        'nim'      => '230411100005',
+        'role'     => 'mahasiswa',
+        'avatar'   => null,
+    ],
+];
+
+/**
+ * Find a user by username and password.
+ * Returns the user array (without password) on success, or null on failure.
+ */
+function findUser(string $username, string $password): ?array {
+    global $userAccounts;
+    foreach ($userAccounts as $user) {
+        if ($user['username'] === $username && $user['password'] === $password) {
+            $safe = $user;
+            unset($safe['password']); // never store password in session
+            return $safe;
+        }
+    }
+    return null;
+}
+
+// ── Mock Database / Data Arrays for LMS ─────────────────────────────────────
 
 $kelasList = [
     [
