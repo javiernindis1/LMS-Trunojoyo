@@ -20,11 +20,154 @@ require_once 'layouts/header.php';
 <?php else: ?>
 
 <!-- Unduh button di atas -->
+<!-- Unduh button di atas -->
 <div class="nilai-topbar d-flex justify-content-end p-3 pb-0">
     <button class="btn btn-primary btn-tambah" id="btnUnduh">
         <i class="bi bi-download me-1"></i>Unduh
     </button>
 </div>
+
+<!-- Overlay Unduh -->
+<div id="overlayUnduh" 
+     style="position: fixed;
+            inset: 0;
+            background: rgba(32,33,36,0.6);
+            display: none;
+            justify-content: center;
+            align-items: center;
+            z-index: 9999;">
+
+    <div style="width: 820px;
+                background: #fff;
+                border-radius: 14px;
+                padding: 28px 36px;
+                position: relative;">
+
+        <!-- Close -->
+        <button id="closeUnduhOverlay"
+                style="position: absolute;
+                       top: 18px;
+                       right: 18px;
+                       border: none;
+                       background: none;
+                       font-size: 28px;
+                       color: #5f6368;
+                       cursor: pointer;">
+            <i class="bi bi-x"></i>
+        </button>
+
+        <!-- Title -->
+        <div style="font-size: 24px;
+                    font-weight: 700;
+                    text-align: center;
+                    margin-bottom: 24px;
+                    color: #202124;">
+            Unduh Nilai Mahasiswa
+        </div>
+
+        <!-- Box -->
+        <div style="border: 1px solid #dadce0;
+                    border-radius: 10px;
+                    padding: 22px 24px;
+                    margin-bottom: 24px;">
+
+            <!-- Pilih semua -->
+            <label style="display: flex;
+                          align-items: center;
+                          gap: 12px;
+                          font-size: 16px;
+                          color: #202124;
+                          cursor: pointer;
+                          margin-bottom: 14px;">
+
+                <input type="checkbox"
+                       id="checkAllNilai"
+                       style="width: 20px; height: 20px;">
+
+                Pilih Semua
+            </label>
+
+            <hr style="margin: 0 0 18px 0; border-color: #e0e0e0;">
+
+            <!-- Tugas -->
+            <div style="font-size: 15px;
+                        color: #9aa0a6;
+                        margin-bottom: 12px;">
+                Tugas
+            </div>
+
+            <div style="display: flex;
+                        flex-direction: column;
+                        gap: 14px;
+                        margin-bottom: 20px;">
+
+                <label style="display:flex; align-items:center; gap:12px; cursor:pointer;">
+                    <input type="checkbox" class="nilai-checkbox" style="width:20px; height:20px;">
+                    <span>Tugas 1</span>
+                </label>
+
+                <label style="display:flex; align-items:center; gap:12px; cursor:pointer;">
+                    <input type="checkbox" class="nilai-checkbox" style="width:20px; height:20px;">
+                    <span>Tugas 2</span>
+                </label>
+
+                <label style="display:flex; align-items:center; gap:12px; cursor:pointer;">
+                    <input type="checkbox" class="nilai-checkbox" style="width:20px; height:20px;">
+                    <span>Tugas 3</span>
+                </label>
+
+                <label style="display:flex; align-items:center; gap:12px; cursor:pointer;">
+                    <input type="checkbox" class="nilai-checkbox" style="width:20px; height:20px;">
+                    <span>Tugas 4</span>
+                </label>
+
+            </div>
+
+            <hr style="margin: 0 0 18px 0; border-color: #e0e0e0;">
+
+            <!-- Ujian -->
+            <div style="font-size: 15px;
+                        color: #9aa0a6;
+                        margin-bottom: 12px;">
+                Ujian
+            </div>
+
+            <div style="display: flex;
+                        flex-direction: column;
+                        gap: 14px;">
+
+                <label style="display:flex; align-items:center; gap:12px; cursor:pointer;">
+                    <input type="checkbox" class="nilai-checkbox" style="width:20px; height:20px;">
+                    <span>UAS</span>
+                </label>
+
+                <label style="display:flex; align-items:center; gap:12px; cursor:pointer;">
+                    <input type="checkbox" class="nilai-checkbox" style="width:20px; height:20px;">
+                    <span>UTS</span>
+                </label>
+
+            </div>
+
+        </div>
+
+        <!-- Button -->
+        <div style="display:flex; justify-content:center;">
+            <button style="width: 120px;
+                           height: 48px;
+                           border: none;
+                           border-radius: 10px;
+                           background: #1a73e8;
+                           color: #fff;
+                           font-size: 16px;
+                           font-weight: 600;
+                           cursor: pointer;">
+                Unduh
+            </button>
+        </div>
+
+    </div>
+</div>
+
 
 <!-- Tabel Nilai -->
 <div class="nilai-card">
@@ -75,6 +218,42 @@ require_once 'layouts/header.php';
     </div>
 </div>
 
+
+
+<script>
+
+const btnUnduh = document.getElementById('btnUnduh');
+const overlayUnduh = document.getElementById('overlayUnduh');
+const closeUnduhOverlay = document.getElementById('closeUnduhOverlay');
+
+btnUnduh.addEventListener('click', () => {
+    overlayUnduh.style.display = 'flex';
+});
+
+closeUnduhOverlay.addEventListener('click', () => {
+    overlayUnduh.style.display = 'none';
+});
+
+overlayUnduh.addEventListener('click', (e) => {
+
+    if (e.target === overlayUnduh) {
+        overlayUnduh.style.display = 'none';
+    }
+
+});
+
+const checkAllNilai = document.getElementById('checkAllNilai');
+const nilaiCheckboxes = document.querySelectorAll('.nilai-checkbox');
+
+checkAllNilai.addEventListener('change', () => {
+
+    nilaiCheckboxes.forEach(item => {
+        item.checked = checkAllNilai.checked;
+    });
+
+});
+
+</script>
 <?php endif; ?>
 
 <?php require_once 'layouts/footer.php'; ?>
