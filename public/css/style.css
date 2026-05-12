@@ -1220,6 +1220,170 @@ body {
     }
 }
 
+/* ============================================
+   DETAIL HEADER NAVBAR (header-detail.php)
+   ============================================ */
+
+.detail-navbar {
+    background-color: #f8f9fa;
+    border-bottom: 1px solid #e0e0e0;
+    padding: 12px 24px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+
+.detail-nav-left {
+    display: flex;
+    align-items: center;
+    gap: 16px;
+}
+
+.detail-nav-right {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+}
+
+.btn-close-detail {
+    color: #5f6368;
+    font-size: 24px;
+    text-decoration: none;
+    display: flex;
+    align-items: center;
+    transition: color .15s;
+}
+
+.btn-close-detail:hover {
+    color: #202124;
+}
+
+.detail-icon {
+    color: #1a73e8;
+    font-size: 18px;
+    background: #e8f0fe;
+    width: 36px;
+    height: 36px;
+    border-radius: 6px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-shrink: 0;
+}
+
+.detail-title {
+    font-size: 18px;
+    color: #5f6368;
+    margin: 0;
+    font-weight: 500;
+}
+
+.btn-hapus {
+    background-color: #c5221f;
+    color: white;
+    border: none;
+    padding: 6px 20px;
+    border-radius: 4px;
+    font-weight: 500;
+    font-size: 14px;
+    cursor: pointer;
+    transition: background .15s;
+}
+
+.btn-hapus:hover {
+    background-color: #a71c1a;
+}
+
+.btn-edit {
+    background-color: #1a73e8;
+    color: white;
+    border: none;
+    padding: 6px 24px;
+    border-radius: 4px;
+    font-weight: 500;
+    font-size: 14px;
+    cursor: pointer;
+    transition: background .15s;
+}
+
+.btn-edit:hover {
+    background-color: #1558b0;
+}
+
+.detail-content-wrapper {
+    max-width: 800px;
+    margin: 24px auto;
+    display: flex;
+    flex-direction: column;
+    padding: 0 16px;
+}
+
+/* Delete Confirmation Overlay */
+.delete-overlay {
+    position: fixed;
+    inset: 0;
+    background: rgba(0, 0, 0, .45);
+    display: none;
+    align-items: center;
+    justify-content: center;
+    z-index: 9999;
+    padding: 20px;
+}
+
+.delete-overlay.show {
+    display: flex;
+}
+
+.delete-modal {
+    width: 100%;
+    max-width: 420px;
+    background: #fff;
+    border-radius: 24px;
+    padding: 36px 32px;
+    text-align: center;
+    animation: fadeInScale .2s ease;
+}
+
+.delete-icon-wrap {
+    width: 82px;
+    height: 82px;
+    margin: 0 auto 22px;
+    border-radius: 50%;
+    background: rgba(220, 53, 69, .12);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.delete-icon-wrap i {
+    font-size: 38px;
+    color: #dc3545;
+}
+
+.delete-title {
+    font-size: 22px;
+    font-weight: 700;
+    margin-bottom: 12px;
+    color: #222;
+}
+
+.delete-desc {
+    font-size: 15px;
+    color: #666;
+    margin-bottom: 30px;
+}
+
+.delete-action {
+    display: flex;
+    justify-content: center;
+    gap: 14px;
+}
+
+@keyframes fadeInScale {
+    from { opacity: 0; transform: scale(.95); }
+    to   { opacity: 1; transform: scale(1); }
+}
+
 /* presensi */
 
 .presensi-summary-box {
