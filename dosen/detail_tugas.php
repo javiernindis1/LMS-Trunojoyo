@@ -53,7 +53,6 @@ require_once 'layouts/header-detail.php';
     </div>
 </div>
 
-<!-- Komentar Card -->
 <div class="detail-card mt-4">
 
     <div class="d-flex justify-content-between align-items-center mb-4">
