@@ -59,9 +59,8 @@ require_once 'layouts/header.php';
                 <div class="asesmen-judul"><?= htmlspecialchars($t['judul']) ?></div>
                 <div class="asesmen-meta-row">
                     <span class="text-muted"><i class="bi bi-calendar3 me-1"></i><?= $t['tanggal'] ?></span>
-                    <span class="text-muted mx-2">â€¢</span>
+                    <span class="text-muted mx-2">|</span>
                     <span class="text-muted"><?= $t['poin'] ?> Poin</span>
-                    <span class="<?= $visClass ?> ms-3"><?= htmlspecialchars($t['visibilitas']) ?></span>
                 </div>
             </div>
         </div>
@@ -70,15 +69,12 @@ require_once 'layouts/header.php';
             <span class="asesmen-badge <?= $badgeClass ?>"><?= $badgeLabel ?></span>
         </div>
     </div>
-    <div class="asesmen-file">
-        <i class="bi bi-paperclip me-1 text-muted"></i><?= htmlspecialchars($t['file']) ?>
-    </div>
+    
     <hr class="lms-card-divider">
     <div class="asesmen-footer">
-        <span>Total Siswa: <strong><?= $t['total_siswa'] ?></strong></span>
-        <span>Dikumpulkan: <strong class="text-success"><?= $t['dikumpulkan'] ?></strong></span>
-        <span>Belum Dikumpulkan: <strong class="text-danger"><?= $t['belum'] ?></strong></span>
-        <span>Dinilai: <strong class="text-primary"><?= $t['dinilai'] ?></strong></span>
+        <div class="asesmen-file">
+            <i class="bi bi-paperclip me-1 text-muted"></i><?= htmlspecialchars($t['file']) ?>
+        </div>
     </div>
 </div>
 <?php endforeach; ?>
@@ -92,7 +88,8 @@ require_once 'layouts/header.php';
     $badgeLabel  = $k['status'] === 'aktif' ? 'Aktif' : ($k['status'] === 'expired' ? 'Melewati Batas Waktu' : 'Draft');
     $detailUrl   = 'detail_kuis.php?id=' . $k['id'] . '&kelas_id=' . $kelasId;
 ?>
-<div class="asesmen-card asesmen-card-clickable" style="border-left-color: <?= $borderColor ?>;" 
+<div class="asesmen-card asesmen-card-clickable" 
+    style="border-left-color: <?= $borderColor ?>;"
     onclick="openKuisOverlay(
         '<?= htmlspecialchars($k['judul']) ?>',
         '<?= $detailUrl ?>',
@@ -100,44 +97,101 @@ require_once 'layouts/header.php';
         '<?= $k['durasi'] ?>',
         '<?= $k['total_poin'] ?>'
     )"
-    role="link" tabindex="0">
-    <div class="d-flex align-items-start gap-3 mb-3">
+    role="link" tabindex="0"
+>
+
+    <!-- HEADER -->
+    <div style="display: flex; align-items: flex-start; gap: 16px;">
+
+        <!-- ICON -->
         <div class="asesmen-icon kuis-icon" style="background:<?= $iconBg ?>;">
             <i class="bi bi-question-lg text-white fs-5"></i>
         </div>
-        <div>
-            <div class="asesmen-judul"><?= htmlspecialchars($k['judul']) ?></div>
-            <span class="asesmen-badge <?= $badgeClass ?>"><?= $badgeLabel ?></span>
+
+        <!-- KIRI (judul + status + nilai) -->
+        <div style="flex: 1;">
+
+            <!-- BARIS ATAS -->
+            <div style="display: flex; align-items: center;">
+
+                <div>
+                    <div class="asesmen-judul"><?= htmlspecialchars($k['judul']) ?></div>
+
+                    <div style="display: flex; align-items: center; gap: 12px; margin-top: 4px;">
+                        <span class="asesmen-badge <?= $badgeClass ?>">
+                            <?= $badgeLabel ?>
+                        </span>
+
+                        <span style="font-size: 14px; color: #5f6368;">
+                            Nilai: <strong><?= $k['rata_nilai'] ?></strong>
+                        </span>
+                    </div>
+                </div>
+
+                <!-- TOMBOL (KANAN) -->
+                <button
+                    onclick="event.stopPropagation(); window.location='hasil_kuis.php?id=<?= $k['id'] ?>&kelas_id=<?= $kelasId ?>'"
+                    style="
+                        margin-left: auto;
+                        display: flex;
+                        align-items: center;
+                        gap: 8px;
+                        padding: 8px 14px;
+                        border: 1px solid #1a73e8;
+                        background: transparent;
+                        color: #1a73e8;
+                        border-radius: 8px;
+                        font-size: 14px;
+                        font-weight: 500;
+                        cursor: pointer;
+                    "
+                    onmouseover="this.style.background='#e8f0fe'"
+                    onmouseout="this.style.background='transparent'"
+                >
+                    <i class="bi bi-eye" style="color:#1a73e8;"></i>
+                    Lihat hasil
+                </button>
+
+            </div>
+
         </div>
+
     </div>
-    <div class="kuis-grid">
+
+    <!-- GRID -->
+    <div class="kuis-grid" style="margin-top: 16px;">
         <div class="kuis-grid-item">
             <span class="kuis-grid-label">Tanggal Mulai</span>
             <span class="kuis-grid-value"><?= $k['tgl_mulai'] ?></span>
         </div>
+
         <div class="kuis-grid-item">
             <span class="kuis-grid-label">Tenggat Waktu</span>
             <span class="kuis-grid-value"><?= $k['tenggat'] ?></span>
         </div>
+
         <div class="kuis-grid-item">
             <span class="kuis-grid-label">Durasi</span>
             <span class="kuis-grid-value"><strong><?= $k['durasi'] ?></strong></span>
         </div>
+
         <div class="kuis-grid-item">
             <span class="kuis-grid-label">Total Poin</span>
             <span class="kuis-grid-value"><strong><?= $k['total_poin'] ?></strong></span>
         </div>
+
         <div class="kuis-grid-item">
             <span class="kuis-grid-label">Pertanyaan</span>
             <span class="kuis-grid-value"><strong><?= $k['pertanyaan'] ?></strong></span>
         </div>
+
         <div class="kuis-grid-item">
             <span class="kuis-grid-label">Rata-Rata Nilai</span>
             <span class="kuis-grid-value"><strong><?= $k['rata_nilai'] ?></strong></span>
         </div>
     </div>
-</div>
 
+</div>
 <?php endforeach; ?>
 
 <!-- ===== MODAL OVERLAY KUIS (di luar foreach) ===== -->
