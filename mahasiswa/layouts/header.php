@@ -1,8 +1,8 @@
 ﻿<?php
 // Initialize settings
 if (!defined('BASE_URL')) {
-    // define('BASE_URL', 'http://' . $_SERVER['HTTP_HOST'] . '/Magang/LMS-Trunojoyo'); // javier
-    define('BASE_URL', 'http://lms-trunojoyo.test'); // abid
+    define('BASE_URL', 'http://' . $_SERVER['HTTP_HOST'] . '/Magang/LMS-Trunojoyo'); // javier
+    // define('BASE_URL', 'http://lms-trunojoyo.test'); // abid
 }
 
 // Get class ID from URL
@@ -54,10 +54,7 @@ if (strpos($_SERVER['REQUEST_URI'], '/mahasiswa/') !== false) {
         $navItems = [
             ['page' => 'stream.php',    'name' => 'stream',    'label' => 'Stream',            'icon' => 'cast'],
             ['page' => 'asesmen.php',   'name' => 'asesmen',   'label' => 'Asesmen',           'icon' => 'book'],
-            ['page' => 'presensi.php',  'name' => 'presensi',  'label' => 'Presensi',          'icon' => 'pencil'],
-            ['page' => 'nilai.php',     'name' => 'nilai',     'label' => 'Nilai',             'icon' => 'grid'],
-            ['page' => 'laporan.php',   'name' => 'laporan',   'label' => 'Laporan',           'icon' => 'file-earmark-text'],
-            ['page' => 'manajemen_laporan.php', 'name' => 'manajemen', 'label' => 'Manajemen Laporan', 'icon' => 'file-earmark-bar-graph'],
+            ['page' => 'presensi.php',  'name' => 'presensi',  'label' => 'Presensi',          'icon' => 'pencil']
         ];
         foreach ($navItems as $item):
             $isActive = ($activeNav ?? '') === $item['name'];

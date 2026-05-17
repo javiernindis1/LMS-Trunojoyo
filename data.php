@@ -336,24 +336,48 @@ $presensiList = [
     ]
 ];
 
+// Data pertemuan per kelas (dengan tanggal & status konfirmasi mahasiswa)
+$pertemuanData = [
+    ['id' => 1,  'kelas_id' => 1, 'label' => 'Pertemuan 1',  'tanggal' => '28 Maret 2026',  'status' => 'selesai',       'konfirmasi' => ['M001' => 'hadir', 'M002' => 'hadir']],
+    ['id' => 2,  'kelas_id' => 1, 'label' => 'Pertemuan 2',  'tanggal' => '04 April 2026',  'status' => 'selesai',       'konfirmasi' => ['M001' => 'alpha', 'M002' => 'hadir']],
+    ['id' => 3,  'kelas_id' => 1, 'label' => 'Pertemuan 3',  'tanggal' => '11 April 2026',  'status' => 'berlangsung',   'konfirmasi' => ['M002' => 'hadir']],  // M001 belum konfirmasi
+    ['id' => 4,  'kelas_id' => 1, 'label' => 'Pertemuan 4',  'tanggal' => '18 April 2026',  'status' => 'berlangsung',   'konfirmasi' => ['M001' => 'hadir']], // M001 sudah konfirmasi
+    ['id' => 5,  'kelas_id' => 1, 'label' => 'Pertemuan 5',  'tanggal' => '25 April 2026',  'status' => 'belum_dimulai', 'konfirmasi' => []],
+    ['id' => 6,  'kelas_id' => 1, 'label' => 'Pertemuan 6',  'tanggal' => '02 Mei 2026',    'status' => 'belum_dimulai', 'konfirmasi' => []],
+    ['id' => 7,  'kelas_id' => 1, 'label' => 'Pertemuan 7',  'tanggal' => '09 Mei 2026',    'status' => 'belum_dimulai', 'konfirmasi' => []],
+    ['id' => 8,  'kelas_id' => 1, 'label' => 'Pertemuan 8',  'tanggal' => '16 Mei 2026',    'status' => 'belum_dimulai', 'konfirmasi' => []],
+    ['id' => 9,  'kelas_id' => 1, 'label' => 'Pertemuan 9',  'tanggal' => '23 Mei 2026',    'status' => 'belum_dimulai', 'konfirmasi' => []],
+    ['id' => 10, 'kelas_id' => 1, 'label' => 'Pertemuan 10', 'tanggal' => '30 Mei 2026',    'status' => 'belum_dimulai', 'konfirmasi' => []],
+    ['id' => 11, 'kelas_id' => 1, 'label' => 'Pertemuan 11', 'tanggal' => '06 Juni 2026',   'status' => 'belum_dimulai', 'konfirmasi' => []],
+    ['id' => 12, 'kelas_id' => 1, 'label' => 'Pertemuan 12', 'tanggal' => '13 Juni 2026',   'status' => 'belum_dimulai', 'konfirmasi' => []],
+    ['id' => 13, 'kelas_id' => 1, 'label' => 'Pertemuan 13', 'tanggal' => '20 Juni 2026',   'status' => 'belum_dimulai', 'konfirmasi' => []],
+    ['id' => 14, 'kelas_id' => 1, 'label' => 'Pertemuan 14', 'tanggal' => '27 Juni 2026',   'status' => 'belum_dimulai', 'konfirmasi' => []],
+];
+
 function getPertemuanByKelas($kelasId) {
-    return [
-        ['id' => 1,  'label' => 'Pertemuan 1',  'status' => 'selesai'],
-        ['id' => 2,  'label' => 'Pertemuan 2',  'status' => 'selesai'],
-        ['id' => 3,  'label' => 'Pertemuan 3',  'status' => 'belum_dimulai'],
-        ['id' => 4,  'label' => 'Pertemuan 4',  'status' => 'berlangsung'],
-        ['id' => 5,  'label' => 'Pertemuan 5',  'status' => ''],
-        ['id' => 6,  'label' => 'Pertemuan 6',  'status' => ''],
-        ['id' => 7,  'label' => 'Pertemuan 7',  'status' => ''],
-        ['id' => 8,  'label' => 'Pertemuan 8',  'status' => ''],
-        ['id' => 9,  'label' => 'Pertemuan 9',  'status' => ''],
-        ['id' => 10, 'label' => 'Pertemuan 10', 'status' => ''],
-        ['id' => 11, 'label' => 'Pertemuan 11', 'status' => ''],
-        ['id' => 12, 'label' => 'Pertemuan 12', 'status' => ''],
-        ['id' => 13, 'label' => 'Pertemuan 13', 'status' => ''],
-        ['id' => 14, 'label' => 'Pertemuan 14', 'status' => ''],
-    ];
+    global $pertemuanData;
+    return array_values(array_filter($pertemuanData, fn($p) => $p['kelas_id'] == $kelasId));
 }
+
+function getPertemuanById($id) {
+    global $pertemuanData;
+    foreach ($pertemuanData as $p) {
+        if ((int)$p['id'] === (int)$id) return $p;
+    }
+    return null;
+}
+
+/**
+ * Cek apakah mahasiswa sudah konfirmasi kehadiran pada suatu pertemuan.
+ * $nim: NIM mahasiswa (misal 'M001')
+ * Returns: 'hadir' | 'alpha' | null (belum konfirmasi)
+ */
+function getKonfirmasiMahasiswa($pertemuanId, $nim) {
+    $p = getPertemuanById($pertemuanId);
+    if (!$p) return null;
+    return $p['konfirmasi'][$nim] ?? null;
+}
+
 
 function getNilaiByKelas($kelasId) {
     $mahasiswa = [];
