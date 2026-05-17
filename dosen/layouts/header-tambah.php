@@ -1,7 +1,7 @@
 <?php
 if (!defined('BASE_URL')) {
-    define('BASE_URL', 'http://' . $_SERVER['HTTP_HOST'] . '/Magang/LMS-Trunojoyo'); // javier
-    // define(define('BASE_URL', 'http://lms-trunojoyo.test');) // abid
+    // define('BASE_URL', 'http://' . $_SERVER['HTTP_HOST'] . '/Magang/LMS-Trunojoyo'); // javier
+    define('BASE_URL', 'http://lms-trunojoyo.test'); // abid
 }
 
 $kelasId = isset($_GET['kelas_id']) ? (int)$_GET['kelas_id'] : null;

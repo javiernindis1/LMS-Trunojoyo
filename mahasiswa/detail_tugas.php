@@ -18,10 +18,10 @@ $backUrl = 'asesmen.php' . ($kelasId ? '?kelas_id=' . $kelasId : '');
 require_once 'layouts/header-detail.php';
 ?>
 <!-- tugas Card -->
-<div style="display: flex; gap: 24px; align-items: flex-start;">
+<div style="display: flex; gap: 24px; align-items: stretch;">
 
     <!-- KIRI -->
-    <div class="detail-card" style="flex: 1;">
+    <div class="detail-card" style="flex: 1; display: flex; flex-direction: column;">
         <div>
 
             <!-- Judul + nama dosen -->
@@ -64,8 +64,8 @@ require_once 'layouts/header-detail.php';
     <!-- KANAN -->
     <div style="width: 320px; display: flex; flex-direction: column; gap: 16px;">
 
-        <!-- CARD 1 -->
-        <div class="detail-card" style="padding: 16px;">
+        <!-- CARD 1: Ditugaskan -->
+        <div class="detail-card" style="padding: 16px; text-align: center;">
             <div style="font-size: 20px; font-weight: 1000; color: #202124;">
                 Ditugaskan
             </div>
@@ -119,27 +119,103 @@ require_once 'layouts/header-detail.php';
 
         </div>
 
-        <!-- CARD 3 -->
+        <!-- CARD 3: Komentar Pribadi -->
         <div class="detail-card" style="padding: 20px;">
 
             <div style="font-size: 16px; font-weight: 600; color: #202124; margin-bottom: 12px;">
-                Komentar pribadi
+                Komentar Pribadi
             </div>
 
-            <textarea 
-                placeholder="Tambahkan komentar..."
-                style="
-                    width: 100%;
-                    min-height: 120px;
-                    border: 1px solid #dadce0;
-                    border-radius: 8px;
-                    padding: 12px;
-                    outline: none;
-                    resize: none;
-                    font-size: 14px;
-                    color: #202124;
+            <!-- Editor Box -->
+            <div style="
+                border: 1px solid #dadce0;
+                border-radius: 8px;
+                overflow: hidden;
+                background: #fff;
+            ">
+                <!-- Text Input -->
+                <input
+                    type="text"
+                    placeholder="Tambahkan komentar"
+                    style="
+                        width: 100%;
+                        padding: 12px;
+                        font-size: 14px;
+                        color: #202124;
+                        border: none;
+                        outline: none;
+                        background: transparent;
+                        box-sizing: border-box;
+                    "
+                >
+
+                <!-- Toolbar -->
+                <div style="
+                    display: flex;
+                    align-items: center;
+                    justify-content: space-between;
+                    padding: 6px 10px;
                     background: #fff;
-                "></textarea>
+                ">
+                    <!-- Format buttons -->
+                    <div style="display: flex; gap: 4px;">
+                        <button onclick="document.execCommand('bold')" title="Bold" style="
+                            width: 30px; height: 30px;
+                            border: none; background: transparent;
+                            border-radius: 4px; cursor: pointer;
+                            font-size: 14px; font-weight: 700;
+                            color: #444;
+                            display: flex; align-items: center; justify-content: center;
+                        " onmouseover="this.style.background='#f1f3f4'" onmouseout="this.style.background='transparent'">
+                            B
+                        </button>
+                        <button onclick="document.execCommand('italic')" title="Italic" style="
+                            width: 30px; height: 30px;
+                            border: none; background: transparent;
+                            border-radius: 4px; cursor: pointer;
+                            font-size: 14px; font-style: italic;
+                            color: #444;
+                            display: flex; align-items: center; justify-content: center;
+                        " onmouseover="this.style.background='#f1f3f4'" onmouseout="this.style.background='transparent'">
+                            I
+                        </button>
+                        <button onclick="document.execCommand('underline')" title="Underline" style="
+                            width: 30px; height: 30px;
+                            border: none; background: transparent;
+                            border-radius: 4px; cursor: pointer;
+                            font-size: 14px; 
+                            color: #444;
+                            display: flex; align-items: center; justify-content: center;
+                        " onmouseover="this.style.background='#f1f3f4'" onmouseout="this.style.background='transparent'">
+                            U
+                        </button>
+                        <button onclick="document.execCommand('insertUnorderedList')" title="List" style="
+                            width: 30px; height: 30px;
+                            border: none; background: transparent;
+                            border-radius: 4px; cursor: pointer;
+                            font-size: 16px;
+                            color: #444;
+                            display: flex; align-items: center; justify-content: center;
+                        " onmouseover="this.style.background='#f1f3f4'" onmouseout="this.style.background='transparent'">
+                            &#8801;
+                        </button>
+                    </div>
+
+                    <!-- Send button -->
+                    <button title="Kirim" style="
+                        width: 32px; height: 32px;
+                        border: none;
+                        background: transparent;
+                        border-radius: 50%;
+                        cursor: pointer;
+                        color: #444444;
+                        font-size: 16px;
+                        display: flex; align-items: center; justify-content: center;
+                    " onmouseover="this.style.background='#e8f0fe'" onmouseout="this.style.background='transparent'">
+                        <i class="bi bi-send-fill"></i>
+                    </button>
+                </div>
+            </div>
 
         </div>
 

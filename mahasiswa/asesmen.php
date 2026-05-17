@@ -92,7 +92,15 @@ require_once 'layouts/header.php';
     $badgeLabel  = $k['status'] === 'aktif' ? 'Aktif' : ($k['status'] === 'expired' ? 'Melewati Batas Waktu' : 'Draft');
     $detailUrl   = 'detail_kuis.php?id=' . $k['id'] . '&kelas_id=' . $kelasId;
 ?>
-<div class="asesmen-card asesmen-card-clickable" style="border-left-color: <?= $borderColor ?>;"  onclick="openKuisOverlay('<?= htmlspecialchars($k['judul']) ?>','<?= $detailUrl ?>')"    role="link" tabindex="0">
+<div class="asesmen-card asesmen-card-clickable" style="border-left-color: <?= $borderColor ?>;" 
+    onclick="openKuisOverlay(
+        '<?= htmlspecialchars($k['judul']) ?>',
+        '<?= $detailUrl ?>',
+        '<?= $k['pertanyaan'] ?>',
+        '<?= $k['durasi'] ?>',
+        '<?= $k['total_poin'] ?>'
+    )"
+    role="link" tabindex="0">
     <div class="d-flex align-items-start gap-3 mb-3">
         <div class="asesmen-icon kuis-icon" style="background:<?= $iconBg ?>;">
             <i class="bi bi-question-lg text-white fs-5"></i>
@@ -130,9 +138,11 @@ require_once 'layouts/header.php';
     </div>
 </div>
 
+<?php endforeach; ?>
+
+<!-- ===== MODAL OVERLAY KUIS (di luar foreach) ===== -->
 <div 
     id="kuisOverlay"
-    
     style="
         position: fixed;
         inset: 0;
@@ -143,246 +153,111 @@ require_once 'layouts/header.php';
         z-index: 9999;
     "
 >
-
-    <div
-        style="
-            width: 440px;
-            background: #fff;
-            border-radius: 24px;
-            padding: 28px;
-            position: relative;
-        "
-    >
+    <div style="
+        width: 480px;
+        max-width: 95vw;
+        background: #fff;
+        border-radius: 20px;
+        padding: 32px 28px 28px;
+        position: relative;
+        box-shadow: 0 8px 40px rgba(0,0,0,0.18);
+    ">
 
         <!-- CLOSE -->
-        <button
-            onclick="closeKuisOverlay()"
-            style="
-                position: absolute;
-                top: 18px;
-                right: 18px;
-                border: none;
-                background: transparent;
-                font-size: 22px;
-                color: #5f6368;
-                cursor: pointer;
-            "
-        >
-            <i class="bi bi-x-lg"></i>
-        </button>
+        <button onclick="closeKuisOverlay()" style="
+            position: absolute;
+            top: 16px; right: 18px;
+            border: none; background: transparent;
+            font-size: 22px; color: #5f6368;
+            cursor: pointer; line-height: 1;
+        ">&times;</button>
 
         <!-- HEADER -->
-        <div
-            style="
-                display: flex;
-                align-items: center;
-                justify-content: center;
-                gap: 12px;
-                margin-bottom: 28px;
-            "
-        >
-
-            <div
-                style="
-                    width: 52px;
-                    height: 52px;
-                    border-radius: 14px;
-                    background: #e8f0fe;
-                    display: flex;
-                    align-items: center;
-                    justify-content: center;
-                "
-            >
-                <i 
-                    class="bi bi-book-fill"
-                    style="
-                        font-size: 24px;
-                        color: #1a73e8;
-                    "
-                ></i>
+        <div style="display: flex; align-items: center; justify-content: center; gap: 12px; margin-bottom: 28px;">
+            <div style="
+                width: 44px; height: 44px;
+                border-radius: 10px;
+                background: #1a73e8;
+                display: flex; align-items: center; justify-content: center;
+                color: white; font-size: 20px;
+            ">
+                <i class="bi bi-book-fill"></i>
             </div>
-
-            <div
-                id="overlayJudul"
-                style="
-                    font-size: 24px;
-                    font-weight: 700;
-                    color: #202124;
-                "
-            >
+            <div id="overlayJudul" style="font-size: 22px; font-weight: 700; color: #202124;">
                 Kuis
             </div>
-
         </div>
 
         <!-- TOP GRID -->
-        <div
-            style="
-                display: flex;
-                gap: 16px;
-                margin-bottom: 16px;
-            "
-        >
+        <div style="display: flex; gap: 12px; margin-bottom: 12px;">
 
-            <!-- TOTAL PERTANYAAN -->
-            <div
-                style="
-                    flex: 1;
-                    border: 1px solid #dadce0;
-                    border-radius: 16px;
-                    padding: 18px;
-                "
-            >
-
-                <div
-                    style="
-                        font-size: 13px;
-                        color: #5f6368;
-                        margin-bottom: 10px;
-                    "
-                >
-                    Total Pertanyaan
+            <!-- Total Pertanyaan -->
+            <div style="flex: 1; background: #f1f3f4; border-radius: 12px; padding: 18px;">
+                <div style="font-size: 12px; color: #5f6368; margin-bottom: 8px; display: flex; align-items: center; gap: 6px;">
+                    <i class="bi bi-question-circle"></i> Total Pertanyaan
                 </div>
-
-                <div
-                    id="overlayPertanyaan"
-                    style="
-                        font-size: 26px;
-                        font-weight: 700;
-                        color: #202124;
-                    "
-                >
-                    20
-                </div>
-
+                <div id="overlayPertanyaan" style="font-size: 28px; font-weight: 700; color: #202124;">—</div>
             </div>
 
-            <!-- DURASI -->
-            <div
-                style="
-                    flex: 1;
-                    border: 1px solid #dadce0;
-                    border-radius: 16px;
-                    padding: 18px;
-                "
-            >
-
-                <div
-                    style="
-                        font-size: 13px;
-                        color: #5f6368;
-                        margin-bottom: 10px;
-                    "
-                >
-                    Durasi
+            <!-- Durasi -->
+            <div style="flex: 1; background: #f1f3f4; border-radius: 12px; padding: 18px;">
+                <div style="font-size: 12px; color: #5f6368; margin-bottom: 8px; display: flex; align-items: center; gap: 6px;">
+                    <i class="bi bi-clock-history"></i> Durasi
                 </div>
-
-                <div
-                    id="overlayDurasi"
-                    style="
-                        font-size: 26px;
-                        font-weight: 700;
-                        color: #202124;
-                    "
-                >
-                    60 Menit
-                </div>
-
+                <div id="overlayDurasi" style="font-size: 28px; font-weight: 700; color: #202124;">—</div>
             </div>
 
         </div>
 
-        <!-- TOTAL POIN -->
-        <div
-            style="
-                border: 1px solid #dadce0;
-                border-radius: 16px;
-                padding: 18px;
-                margin-bottom: 24px;
-            "
-        >
-
-            <div
-                style="
-                    font-size: 13px;
-                    color: #5f6368;
-                    margin-bottom: 10px;
-                "
-            >
-                Total Poin
+        <!-- Total Poin -->
+        <div style="background: #f1f3f4; border-radius: 12px; padding: 18px; margin-bottom: 24px; text-align: center;">
+            <div style="font-size: 12px; color: #5f6368; margin-bottom: 8px; display: flex; align-items: center; justify-content: center; gap: 6px;">
+                <i class="bi bi-star"></i> Total Poin
             </div>
-
-            <div
-                id="overlayPoin"
-                style="
-                    font-size: 26px;
-                    font-weight: 700;
-                    color: #202124;
-                "
-            >
-                100
-            </div>
-
+            <div id="overlayPoin" style="font-size: 32px; font-weight: 700; color: #202124;">—</div>
         </div>
 
-        <!-- BUTTON -->
-      <button
-            id="btnMulaiKuis"         
-            style="
-                width: 100%;
-                height: 50px;
-                border: none;
-                background: #1a73e8;
-                color: white;
-                border-radius: 14px;
-                font-size: 15px;
-                font-weight: 600;
-                cursor: pointer;
-                display: flex;
-                align-items: center;
-                justify-content: center;
-                text-decoration: none;
-            "
+        <!-- Tombol Mulai -->
+        <button id="btnMulaiKuis" style="
+            width: 100%; height: 50px;
+            border: none;
+            background: #1a73e8;
+            color: white;
+            border-radius: 12px;
+            font-size: 16px; font-weight: 700;
+            cursor: pointer;
+            transition: background .15s;
+        "
+        onmouseover="this.style.background='#1557b0'"
+        onmouseout="this.style.background='#1a73e8'"
         >
-            Mulai Kuis
+            Mulai
         </button>
 
     </div>
-
 </div>
 
 <script>
-
-const kuisOverlay = document.getElementById('kuisOverlay');
-
-const overlayJudul = document.getElementById('overlayJudul');
-const overlayPertanyaan = document.getElementById('overlayPertanyaan');
-const overlayDurasi = document.getElementById('overlayDurasi');
-const overlayPoin = document.getElementById('overlayPoin');
-
-const btnMulaiKuis = document.getElementById('btnMulaiKuis');
-
-function openKuisOverlay(judul, url) {
-
-    overlayJudul.innerText = judul;
-
-    btnMulaiKuis.onclick = function () {
+function openKuisOverlay(judul, url, pertanyaan, durasi, poin) {
+    document.getElementById('overlayJudul').innerText     = judul;
+    document.getElementById('overlayPertanyaan').innerText = pertanyaan || '—';
+    document.getElementById('overlayDurasi').innerText    = (durasi || '—');
+    document.getElementById('overlayPoin').innerText      = poin || '—';
+    document.getElementById('btnMulaiKuis').onclick = function() {
         window.location.href = url;
     };
-
-    kuisOverlay.style.display = 'flex';
+    var overlay = document.getElementById('kuisOverlay');
+    overlay.style.display = 'flex';
 }
 
 function closeKuisOverlay() {
-    kuisOverlay.style.display = 'none';
+    document.getElementById('kuisOverlay').style.display = 'none';
 }
-
 </script>
-<?php endforeach; ?>
-<?php endif; ?>
+<?php endif; // akhir: if ($tab === 'kuis') ?>
 
 </div><!-- /tab-content-area -->
-<?php endif; ?>
+<?php endif; // akhir: if ($kelasId) ?>
 
 
 

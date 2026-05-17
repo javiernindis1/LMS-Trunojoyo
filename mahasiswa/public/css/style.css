@@ -1269,11 +1269,18 @@ body {
 
 
 .detail-content-wrapper {
-    max-width: 800px;
+    max-width: 1100px;
     margin: 24px auto;
     display: flex;
     flex-direction: column;
     padding: 0 16px;
+}
+
+/* Placeholder untuk contenteditable editor */
+[contenteditable][data-placeholder]:empty::before {
+    content: attr(data-placeholder);
+    color: #9aa0a6;
+    pointer-events: none;
 }
 
 
@@ -1500,3 +1507,150 @@ body {
     background-color: #ddd;
     border-radius: 10px;
 }
+
+/* ============================================
+   KUIS — NAVBAR & HEADER
+   ============================================ */
+
+.kuis-navbar {
+    position: sticky;
+    top: 0;
+    z-index: 1040;
+    background-color: #fff;
+    border-bottom: 1px solid #e0e0e0;
+    padding: 10px 24px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+
+.kuis-nav-left {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+}
+
+.kuis-nav-icon {
+    color: #1a73e8;
+    font-size: 18px;
+}
+
+.kuis-nav-title {
+    font-size: 18px;
+    font-weight: 600;
+    color: #202124;
+    margin: 0;
+}
+
+/* Timer badge di navbar */
+.kuis-timer-badge {
+    background: #1a73e8;
+    color: white;
+    border-radius: 10px;
+    padding: 6px 20px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    line-height: 1.2;
+    transition: background .3s;
+}
+
+.kuis-timer-label {
+    font-size: 11px;
+    font-weight: 500;
+    opacity: 0.85;
+    letter-spacing: 0.3px;
+}
+
+.kuis-timer-value {
+    font-size: 22px;
+    font-weight: 800;
+    letter-spacing: 1px;
+}
+
+/* ============================================
+   KUIS — OPSI JAWABAN
+   ============================================ */
+
+.kuis-opsi-label {
+    border: 1px solid #dadce0;
+    border-radius: 10px;
+    padding: 10px 16px;
+    display: flex;
+    align-items: center;
+    gap: 14px;
+    cursor: pointer;
+    font-size: 15px;
+    color: #202124;
+    transition: background .12s, border-color .12s;
+}
+
+.kuis-opsi-label:hover {
+    background: #f8f9ff;
+    border-color: #1a73e8;
+}
+
+.kuis-opsi-radio {
+    width: 18px;
+    height: 18px;
+    accent-color: #1a73e8;
+    flex-shrink: 0;
+}
+
+/* ============================================
+   KUIS — TOMBOL SOAL (GRID KANAN)
+   ============================================ */
+
+.kuis-soal-btn {
+    width: 40px;
+    height: 40px;
+    border-radius: 8px;
+    border: 1px solid #dadce0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 15px;
+    font-weight: 600;
+    color: #202124;
+    cursor: pointer;
+    transition: background .12s, border-color .12s, color .12s;
+}
+
+.kuis-soal-btn:hover {
+    background: #e8f0fe;
+    border-color: #1a73e8;
+    color: #1a73e8;
+}
+
+.kuis-soal-btn--active {
+    border: 2px solid #1a73e8;
+    color: #1a73e8;
+    font-weight: 700;
+}
+
+.kuis-soal-btn--done {
+    background: #1a73e8;
+    border-color: #1a73e8;
+    color: white;
+}
+
+/* ============================================
+   KUIS — TOMBOL SELANJUTNYA
+   ============================================ */
+
+.kuis-btn-selanjutnya {
+    height: 44px;
+    padding: 0 36px;
+    border: none;
+    background: #1a73e8;
+    color: white;
+    border-radius: 8px;
+    font-size: 15px;
+    font-weight: 600;
+    cursor: pointer;
+    transition: background .15s;
+}
+
+.kuis-btn-selanjutnya:hover {
+    background: #1557b0;
+}
